@@ -2,38 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*public class Rotacion : MonoBehaviour
+public class Rotacion : MonoBehaviour
 {
-    [SerializeField]
-    public float speed;
-    [SerializeField]
-    private Vector3 rotation;
-
+    public float velocidadRotacion = 10f;
+    public int direccionRotacion = 0;
 
     // Update is called once per frame
     void Update()
     {
-       
-        float Horizontal.getaxis,(Rigidbody.);
+        float direccion = Input.GetAxis("Horizontal");
 
-       // float Vertical.getaxis,(Rigidbody.);
-
-
-        /*if (Input.GetKeyDown(KeyCode.d))
-        {
-            transform.Rotate(rotation * speed * Time.deltaTime);
-           
-        }
-
-        if (Input.GetKeyDown(KeyCode.e))
-        {
-            transform.Rotate(rotation * speed * Time.deltaTime);
-
+        if(direccion > 0) {
+            direccionRotacion = 1;
+        } else if(direccion < 0) {
+            direccionRotacion = -1;
+        } else {
+            direccionRotacion = 0;
         }
     }
-    
-} */
 
-
-
-
+    void FixedUpdate()
+    {
+        transform.Rotate(Vector3.up, direccionRotacion * velocidadRotacion * Time.fixedDeltaTime);
+    }
+}

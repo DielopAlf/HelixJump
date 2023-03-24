@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pelota : MonoBehaviour
 {
     [SerializeField]
-    Rigidbody PELOTArigidbody;
+    Rigidbody pelotaRigidbody;
 
     [SerializeField]
     public float jumpForce = 2f;
@@ -13,31 +13,27 @@ public class Pelota : MonoBehaviour
     [SerializeField]
     GameObject trail;
 
-    void awake()
+    [SerializeField]
+    float velocidadMinimaParaRomper = 10f;
+
+    void Awake()
     {
-
-        PELOTArigidbody.GetComponent<Rigidbody>();
+        pelotaRigidbody = GetComponent<Rigidbody>();
         trail.SetActive(false);
-
     }
-
-
 
     void Update()
     {
-        //  Debug.Log(PELOTArigidbody.velocity.y);
-        trail.SetActive(PELOTArigidbody.velocity.y < -10.0f);
+        trail.SetActive(pelotaRigidbody.velocity.y < -10.0f);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Hachocado");
-        PELOTArigidbody.velocity = Vector3.zero;
-        PELOTArigidbody.AddForce(Vector3.up * jumpForce,ForceMode.Impulse);
-
+        if(collision.gameObject.CompareTag("Plataforma") && pelotaRigidbody.velocity.magnitude >= velocidadMinimaParaRomper) {
+            Destroy(collision.gameObject);
+        } else {
+            pelotaRigidbody.velocity = Vector3.zero;
+            pelotaRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
     }
-
-
-
-
 }
