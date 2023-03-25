@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pelota : MonoBehaviour
 {
@@ -19,19 +20,26 @@ public class Pelota : MonoBehaviour
     void Awake()
     {
         pelotaRigidbody = GetComponent<Rigidbody>();
-        trail.SetActive(false);
+        // trail.SetActive(false);
     }
 
     void Update()
     {
-        trail.SetActive(pelotaRigidbody.velocity.y < -10.0f);
+        // trail.SetActive(pelotaRigidbody.velocity.y < -10.0f);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Plataforma") && pelotaRigidbody.velocity.magnitude >= velocidadMinimaParaRomper) {
+        if (collision.gameObject.CompareTag("Plataforma") && pelotaRigidbody.velocity.magnitude >= velocidadMinimaParaRomper)
+        {
             Destroy(collision.gameObject);
-        } else {
+        }
+        else if (collision.gameObject.CompareTag("Plataformamala"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
             pelotaRigidbody.velocity = Vector3.zero;
             pelotaRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
