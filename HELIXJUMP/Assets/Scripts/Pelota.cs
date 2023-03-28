@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Pelota : MonoBehaviour
 {
     [SerializeField]
-    Rigidbody pelotaRigidbody;
+    public Rigidbody pelotaRigidbody;
 
     [SerializeField]
     public float jumpForce = 2f;
@@ -26,6 +26,7 @@ public class Pelota : MonoBehaviour
     void Update()
     {
         // trail.SetActive(pelotaRigidbody.velocity.y < -10.0f);
+      
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -36,8 +37,18 @@ public class Pelota : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Plataformamala"))
         {
+            SistemadePuntos.instance.resetuntos();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
         }
+        else if (collision.gameObject.CompareTag("META"))
+        {
+
+            SistemadePuntos.instance.gameOver();
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
+        }
+
         else
         {
             pelotaRigidbody.velocity = Vector3.zero;

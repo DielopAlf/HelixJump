@@ -13,40 +13,46 @@ public class Plataformas : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("ball").transform;
+        player = GameObject.FindGameObjectWithTag("Ball").transform;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        
-        if(transform.position.y > player.position.y)
+        if(player.gameObject != null)
         {
-            for(int i = 0; i < plataformasmalas.Length; i++)
+
+            if (transform.position.y > player.position.y)
             {
-                Rigidbody rb = plataformasmalas[i].GetComponent<Rigidbody>();
-                if (rb != null)
+                for (int i = 0; i < plataformasmalas.Length; i++)
                 {
-                    rb.isKinematic = false;
-                    rb.useGravity = true;
-
-                    Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
-
-                    foreach (Collider newCollider in colliders)
+                    Rigidbody rb = plataformasmalas[i].GetComponent<Rigidbody>();
+                    if (rb != null)
                     {
-                        Rigidbody otherRB = newCollider.GetComponent<Rigidbody>();
-                        if (otherRB != null && otherRB.velocity.magnitude >= velocidadMinimaParaDestruir)
+                        rb.isKinematic = false;
+                        rb.useGravity = true;
+
+                        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+
+                        foreach (Collider newCollider in colliders)
                         {
-                            otherRB.AddExplosionForce(force, transform.position, radius);
+                            Rigidbody otherRB = newCollider.GetComponent<Rigidbody>();
+                            if (otherRB != null && otherRB.velocity.magnitude >= velocidadMinimaParaDestruir)
+                            {
+                                otherRB.AddExplosionForce(force, transform.position, radius);
+                            }
                         }
                     }
-                }
 
-                plataformasmalas[i].transform.parent = null;
-                Destroy(plataformasmalas[i].gameObject, 2f);
-                Destroy(this.gameObject, 5f);
+                    plataformasmalas[i].transform.parent = null;
+                    Destroy(plataformasmalas[i].gameObject, 2f);
+                    Destroy(this.gameObject, 5f);
+                }
+                this.enabled = false;
             }
-            this.enabled = false;
+
+
         }
+       
     }
 }

@@ -16,7 +16,11 @@ public class CAMARAFollow : MonoBehaviour
     // Update is called once per frame
     private void LateUpdate()
     {
-        Vector3 newPos = Vector3.Lerp(transform.position,target.position + offset,smoothSpeed);
-        transform.position= newPos;
+        if(target.gameObject != null)
+        {
+            Vector3 newPos = Vector3.Lerp(transform.position, target.position + offset, smoothSpeed);
+            transform.position= newPos;
+        }
+       
     }
 }
