@@ -4,70 +4,60 @@ using UnityEngine;
 
 public class SistemadePuntos : MonoBehaviour
 {
-
-     int puntos;
+    int puntos;
 
     public static SistemadePuntos instance;
 
     public float distanciadeltramo = 10f;
 
-
-    public  Pelota pelota;
+    public Pelota pelota;
 
     float posprevia;
 
     public void Awake()
     {
-         if (instance != null && instance != this)
+        if (instance != null && instance != this)
         {
-            Destroy (this);
-
+            Destroy(this);
         }
-         else
+        else
         {
-            instance = this; 
-
+            instance = this;
         }
     }
+
     public void Start()
     {
         posprevia = pelota.gameObject.transform.position.y;
     }
+
     public void Update()
     {
         puntoscaida();
     }
+
     public void puntoscaida()
     {
-        if (pelota!= null)
-
+        if (pelota != null)
         {
             float posActual = pelota.gameObject.transform.position.y;
-            if (posActual < posprevia -distanciadeltramo)
+            if (posActual < posprevia - distanciadeltramo)
             {
                 float puntostramo = 1 * Mathf.Abs(pelota.pelotaRigidbody.velocity.y);
                 puntos += Mathf.FloorToInt(puntostramo);
                 posprevia = pelota.gameObject.transform.position.y;
-                InterfazController.instance.updatepuntos(puntos);
+                FindObjectOfType<InterfazController>().UpdatePuntos(puntos);
             }
-
         }
-       
-
     }
 
-    public void resetuntos()
+    public void resetPuntos()
     {
         puntos = 0;
     }
 
-    
-
     public void gameOver()
     {
-
-        pelota= null;
-
+        pelota = null;
     }
-
 }

@@ -5,50 +5,43 @@ using UnityEngine.SceneManagement;
 
 public class Pelota : MonoBehaviour
 {
-    [SerializeField]
     public Rigidbody pelotaRigidbody;
-
-    [SerializeField]
     public float jumpForce = 2f;
+    public GameObject trail;
+    public float velocidadMinimaParaRomper = 10f;
 
-    [SerializeField]
-    GameObject trail;
+    private bool gameOver = false;
 
-    [SerializeField]
-    float velocidadMinimaParaRomper = 10f;
-
-    void Awake()
+    private void Awake()
     {
         pelotaRigidbody = GetComponent<Rigidbody>();
         // trail.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
         // trail.SetActive(pelotaRigidbody.velocity.y < -10.0f);
-      
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (gameOver) return;
+
         if (collision.gameObject.CompareTag("Plataforma") && pelotaRigidbody.velocity.magnitude >= velocidadMinimaParaRomper)
         {
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("Plataformamala"))
         {
-            SistemadePuntos.instance.resetuntos();
+            SistemadePuntos.instance.resetPuntos();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
         }
         else if (collision.gameObject.CompareTag("META"))
         {
-
             SistemadePuntos.instance.gameOver();
-            //Destroy(gameObject);
-            gameObject.SetActive(false);
+            gameOver = true;
+            InterfazController.instance.MostrarPanelVictoria();
         }
-
         else
         {
             pelotaRigidbody.velocity = Vector3.zero;

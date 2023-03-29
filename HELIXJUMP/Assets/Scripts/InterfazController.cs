@@ -1,48 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class InterfazController : MonoBehaviour
 {
-     
-
     public TextMeshProUGUI textopuntos;
+    public GameObject panelVictoria;
+    public GameObject panelGameOver;
     public static InterfazController instance;
-    public void Awake()
+
+    private void Awake()
     {
         if (instance != null && instance != this)
         {
-            Destroy(this);
-
+            Destroy(this.gameObject);
         }
         else
         {
             instance = this;
-
         }
     }
-    void Start()
+
+    public void UpdatePuntos(int puntos)
     {
-        
+        textopuntos.text = "Puntos: " + puntos;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MostrarPanelVictoria()
     {
-        
-    }
-    public void updatepuntos(int puntos)
-    {
-        textopuntos.text="puntos: "+puntos; 
-
+        panelVictoria.SetActive(true);
+        Time.timeScale = 0f;
     }
 
-    public void pantallaVctoria()
+    public void MostrarPanelGameOver()
     {
-        
-
-
+        panelGameOver.SetActive(true);
+        Time.timeScale = 0f; 
     }
 
+    public void ReiniciarJuego()
+    {
+        Time.timeScale = 1f; 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void SalirJuego()
+    {
+        Application.Quit();
+    }
 }
