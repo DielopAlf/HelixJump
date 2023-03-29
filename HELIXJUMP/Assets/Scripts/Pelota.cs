@@ -9,8 +9,8 @@ public class Pelota : MonoBehaviour
     public float jumpForce = 2f;
     public GameObject trail;
     public float velocidadMinimaParaRomper = 10f;
-
-    private bool gameOver = false;
+    public float tiempoDeInvencibilidad = 2f;
+    private bool invencible = false;
 
     private void Awake()
     {
@@ -25,11 +25,12 @@ public class Pelota : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (gameOver) return;
-
         if (collision.gameObject.CompareTag("Plataforma") && pelotaRigidbody.velocity.magnitude >= velocidadMinimaParaRomper)
         {
-            Destroy(collision.gameObject);
+            if (!invencible)
+            {
+                Destroy(collision.gameObject);
+            }
         }
         else if (collision.gameObject.CompareTag("Plataformamala"))
         {
@@ -39,13 +40,21 @@ public class Pelota : MonoBehaviour
         else if (collision.gameObject.CompareTag("META"))
         {
             SistemadePuntos.instance.gameOver();
-            gameOver = true;
+            gameObject.SetActive(false);
             InterfazController.instance.MostrarPanelVictoria();
         }
         else
         {
             pelotaRigidbody.velocity = Vector3.zero;
             pelotaRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            StartCoroutine(TiempoInvencible());
         }
+    }
+
+    IEnumerator TiempoInvencible()
+    {
+        invencible = true;
+        yield return new WaitForSeconds(tiempoDeInvencibilidad);
+        invencible = false;
     }
 }
