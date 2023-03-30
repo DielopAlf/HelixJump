@@ -6,30 +6,36 @@ using UnityEngine.SceneManagement;
 public class Pelota : MonoBehaviour
 {
     public Rigidbody pelotaRigidbody;
+
     public float jumpForce = 2f;
-    public GameObject trail;
-    public float velocidadMinimaParaRomper = 10f;
+  
+    [SerializeField] float ultraSpeed = 3f;
+    [SerializeField] GameObject trail;
+    public float velocidadMinimaParaRomper = 0.0001f;
     public float tiempoDeInvencibilidad = 2f;
-    private bool invencible = false;
+    //private bool invencible = false;
+    
 
     private void Awake()
     {
         pelotaRigidbody = GetComponent<Rigidbody>();
-        // trail.SetActive(false);
+         trail.SetActive(false);
     }
 
-    private void Update()
-    {
+     void Update()
+     {
+         trail.SetActive(pelotaRigidbody.velocity.y < -ultraSpeed);
         // trail.SetActive(pelotaRigidbody.velocity.y < -10.0f);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Plataforma") && pelotaRigidbody.velocity.magnitude >= velocidadMinimaParaRomper)
+        if (collision.gameObject.CompareTag("Plataforma") && pelotaRigidbody.velocity.y <= -velocidadMinimaParaRomper)
         {
-            if (!invencible)
+           // if (!invencible)
             {
-                Destroy(collision.gameObject);
+               collision.gameObject.SetActive(false);
+               // DestroyImmediate(collision.gameObject);
             }
         }
         else if (collision.gameObject.CompareTag("Plataformamala"))
@@ -47,14 +53,34 @@ public class Pelota : MonoBehaviour
         {
             pelotaRigidbody.velocity = Vector3.zero;
             pelotaRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            StartCoroutine(TiempoInvencible());
+          //  StartCoroutine(TiempoInvencible());
         }
+
+        /* if (pelotaRigidbody.velocity.y < -ultraSpeed)
+         {
+          Destroy(collision.gameObject);
+
+         }
+         else
+         {
+             pelotaRigidbody.velocity=Vector3.zero;
+             pelotaRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+         }*/
+
+
+
     }
 
-    IEnumerator TiempoInvencible()
+   /* IEnumerator TiempoInvencible()
     {
         invencible = true;
         yield return new WaitForSeconds(tiempoDeInvencibilidad);
         invencible = false;
     }
+    */
+
+
+
+
+
 }

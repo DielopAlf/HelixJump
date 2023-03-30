@@ -6,8 +6,8 @@ public class Rotacion : MonoBehaviour
 {
     public float velocidadRotacion = 10f;
     public int direccionRotacion = 0;
-
-    // Update is called once per frame
+   // [SerializeField] float speed = 5f;
+    
     void Update()
     {
         float direccion = Input.GetAxis("Horizontal");
@@ -18,6 +18,8 @@ public class Rotacion : MonoBehaviour
             direccionRotacion = -1;
         } else {
             direccionRotacion = 0;
+           // Vector3 rot = new Vector3(0f,Input.GetAxis("Horizontal")*speed * Time.deltaTime,0f);
+            //transform.Rotate(rot);
         }
     }
 
