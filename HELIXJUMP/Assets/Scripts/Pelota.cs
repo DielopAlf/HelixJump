@@ -11,7 +11,7 @@ public class Pelota : MonoBehaviour
   
     [SerializeField] float ultraSpeed = 3f;
     [SerializeField] GameObject trail;
-    public float velocidadMinimaParaRomper = 0.0001f;
+    public float velocidadMinimaParaRomper = 0.1f;
     public float tiempoDeInvencibilidad = 2f;
     //private bool invencible = false;
     
@@ -25,23 +25,31 @@ public class Pelota : MonoBehaviour
      void Update()
      {
          trail.SetActive(pelotaRigidbody.velocity.y < -ultraSpeed);
+        Debug.Log(Mathf.Abs(pelotaRigidbody.velocity.y) >= velocidadMinimaParaRomper);  
         // trail.SetActive(pelotaRigidbody.velocity.y < -10.0f);
-    }
+     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Plataforma") && pelotaRigidbody.velocity.y <= -velocidadMinimaParaRomper)
-        {
-           // if (!invencible)
-            {
-               collision.gameObject.SetActive(false);
-               // DestroyImmediate(collision.gameObject);
-            }
+        if (collision.gameObject.CompareTag("Plataforma")  && Mathf.Abs(pelotaRigidbody.velocity.y) <= velocidadMinimaParaRomper)
+        {  
+            
+            collision.gameObject.SetActive(false);
+            
         }
         else if (collision.gameObject.CompareTag("Plataformamala"))
         {
-            SistemadePuntos.instance.resetPuntos();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if ( Mathf.Abs(pelotaRigidbody.velocity.y) <= velocidadMinimaParaRomper)
+
+            {
+                collision.gameObject.SetActive(false);
+            }
+            else
+            {
+                SistemadePuntos.instance.resetPuntos();
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+           
         }
         else if (collision.gameObject.CompareTag("META"))
         {
