@@ -5460,6 +5460,7 @@ GameObject:
   - component: {fileID: 304532010}
   - component: {fileID: 304532009}
   - component: {fileID: 304532013}
+  - component: {fileID: 304532014}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -5569,6 +5570,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadRotacion: 50
   direccionRotacion: 0
+--- !u!114 &304532014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304532008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09664af4aa0798c45883fb1a0b8e91d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plataformasmalas: []
+  velocidadMinimaParaDestruir: 50
 --- !u!850595691 &310631554
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -5946,7 +5961,7 @@ GameObject:
   - component: {fileID: 360941526}
   - component: {fileID: 360941531}
   m_Layer: 0
-  m_Name: Cube (8)
+  m_Name: MALA 3
   m_TagString: Plataformamala
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17153,7 +17168,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27680
+  m_Name: pb_Mesh27740
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17446,6 +17461,7 @@ MonoBehaviour:
   trail: {fileID: 1474051676}
   velocidadMinimaParaRomper: 0.1
   tiempoDeInvencibilidad: 2
+  velocidadNormal: 0
 --- !u!1 &1655744196
 GameObject:
   m_ObjectHideFlags: 0
@@ -24872,7 +24888,7 @@ GameObject:
   - component: {fileID: 1753282010}
   - component: {fileID: 1753282014}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: MALA 1
   m_TagString: Plataformamala
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25314,7 +25330,7 @@ GameObject:
   - component: {fileID: 1814246377}
   - component: {fileID: 1814246382}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: MALA 2
   m_TagString: Plataformamala
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

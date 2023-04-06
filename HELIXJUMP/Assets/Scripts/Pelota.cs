@@ -1,4 +1,3 @@
-// Script de Pelota
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +6,7 @@ using UnityEngine.SceneManagement;
 public class Pelota : MonoBehaviour
 {
     public Rigidbody pelotaRigidbody;
-
     public float jumpForce = 2f;
-
     public float ultraSpeed = 3f;
     [SerializeField] GameObject trail;
     public float velocidadMinimaParaRomper = 50f;
@@ -31,20 +28,23 @@ public class Pelota : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Plataforma") && Mathf.Abs(pelotaRigidbody.velocity.y) <= velocidadMinimaParaRomper)
-        {
-            Destroy(collision.gameObject);
-        }
-        else if (collision.gameObject.CompareTag("Plataformamala"))
+        if (collision.gameObject.CompareTag("Plataforma"))
         {
             if (Mathf.Abs(pelotaRigidbody.velocity.y) <= velocidadMinimaParaRomper)
             {
-                Destroy(collision.gameObject);
+                collision.gameObject.SetActive(false);
             }
-            else
+        }
+        else if (collision.gameObject.CompareTag("Plataformamala"))
+        {
+            if (!invencible && Mathf.Abs(pelotaRigidbody.velocity.y) > velocidadMinimaParaRomper)
             {
                 SistemadePuntos.instance.resetPuntos();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            else
+            {
+                collision.gameObject.SetActive(false);
             }
         }
         else if (collision.gameObject.CompareTag("META"))
