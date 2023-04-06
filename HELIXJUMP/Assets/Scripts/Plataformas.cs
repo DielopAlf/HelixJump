@@ -6,22 +6,31 @@ public class Plataformas : MonoBehaviour
 {
     private Transform player;
     public GameObject[] plataformasmalas;
-    float force= 500f;
-    float radius= 100f;
-    public float velocidadMinimaParaDestruir = 10f;
+    float force = 500f;
+    float radius = 100f;
+    public float velocidadMinimaParaDestruir = 50f;
 
-    // Start is called before the first frame update
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Ball").transform;
     }
 
-    // Update is called once per frame
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            Pelota pelota = collision.gameObject.GetComponent<Pelota>();
+            if (pelota.ultraSpeed > pelota.velocidadNormal && pelota.pelotaRigidbody.velocity.y <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
     private void Update()
     {
-        if(player.gameObject != null)
+        if (player.gameObject != null)
         {
-
             if (transform.position.y > player.position.y)
             {
                 for (int i = 0; i < plataformasmalas.Length; i++)
@@ -45,14 +54,11 @@ public class Plataformas : MonoBehaviour
                     }
 
                     plataformasmalas[i].transform.parent = null;
-                    Destroy(plataformasmalas[i].gameObject, 2f);
-                    Destroy(this.gameObject, 5f);
+                    Destroy(plataformasmalas[i].gameObject, 50f);
+                    Destroy(this.gameObject, 50f);
                 }
                 this.enabled = false;
             }
-
-
         }
-       
     }
 }
