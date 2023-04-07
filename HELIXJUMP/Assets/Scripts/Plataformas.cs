@@ -5,10 +5,11 @@ using UnityEngine;
 public class Plataformas : MonoBehaviour
 {
     private Transform player;
-    public GameObject[] plataformasmalas;
-    float force = 500f;
-    float radius = 100f;
-    public float velocidadMinimaParaDestruir = 50f;
+    public GameObject[] plataformasMalas;
+    public float fuerzaExplosion = 500f;
+    public float radioExplosion = 100f;
+    public float velocidadMinimaParaDestruir = 0.1f;
+    public float velocidadParaRomperse = 5f;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -19,10 +20,50 @@ public class Plataformas : MonoBehaviour
             {
                 if (pelota.ultraSpeed > pelota.velocidadNormal)
                 {
-                    Destroy(gameObject);
+                    SistemadePuntos.instance.resetPuntos();
+                    DestruirPlataforma();
+                }
+                else if (pelota.pelotaRigidbody.velocity.magnitude >= velocidadParaRomperse)
+                {
+                    DestruirPlataforma();
                 }
             }
         }
+    }
+
+    private void DestruirPlataforma()
+    {
+        for (int i = 0; i < plataformasMalas.Length; i++)
+        {
+            Rigidbody rb = plataformasMalas[i].GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = false;
+                rb.useGravity = true;
+
+                Collider[] colliders = Physics.OverlapSphere(plataformasMalas[i].transform.position, radioExplosion);
+
+                foreach (Collider newCollider in colliders)
+                {
+                    Rigidbody otherRB = newCollider.GetComponent<Rigidbody>();
+                    if (otherRB != null && otherRB.velocity.magnitude >= velocidadMinimaParaDestruir)
+                    {
+                        otherRB.AddExplosionForce(fuerzaExplosion, plataformasMalas[i].transform.position, radioExplosion);
+                    }
+                }
+            }
+
+            if (plataformasMalas[i].CompareTag("Plataformamala"))
+            {
+                SistemadePuntos.instance.resetPuntos();
+            }
+
+            plataformasMalas[i].transform.parent = null;
+            Destroy(plataformasMalas[i].gameObject, 50f);
+        }
+
+        Destroy(gameObject, 50f);
+        this.enabled = false;
     }
 
     private void Start()
@@ -34,32 +75,10 @@ public class Plataformas : MonoBehaviour
     {
         if (player.gameObject != null && transform.position.y > player.position.y)
         {
-            for (int i = 0; i < plataformasmalas.Length; i++)
+            if (plataformasMalas.Length == 0)
             {
-                Rigidbody rb = plataformasmalas[i].GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    rb.isKinematic = false;
-                    rb.useGravity = true;
-
-                    Collider[] colliders = Physics.OverlapSphere(plataformasmalas[i].transform.position, radius);
-
-                    foreach (Collider newCollider in colliders)
-                    {
-                        Rigidbody otherRB = newCollider.GetComponent<Rigidbody>();
-                        if (otherRB != null && otherRB.velocity.magnitude >= velocidadMinimaParaDestruir)
-                        {
-                            otherRB.AddExplosionForce(force, plataformasmalas[i].transform.position, radius);
-                        }
-                    }
-                }
-
-                plataformasmalas[i].transform.parent = null;
-                Destroy(plataformasmalas[i].gameObject, 50f);
+                DestruirPlataforma();
             }
-
-            Destroy(gameObject, 50f);
-            this.enabled = false;
         }
     }
 }

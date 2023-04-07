@@ -5460,6 +5460,7 @@ GameObject:
   - component: {fileID: 304532010}
   - component: {fileID: 304532009}
   - component: {fileID: 304532013}
+  - component: {fileID: 304532014}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -5569,6 +5570,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadRotacion: 50
   direccionRotacion: 0
+--- !u!114 &304532014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304532008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09664af4aa0798c45883fb1a0b8e91d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plataformasMalas: []
+  fuerzaExplosion: 500
+  radioExplosion: 100
+  velocidadMinimaParaDestruir: 0.1
+  esPlataformaMala: 0
+  velocidadParaRomperse: 5
 --- !u!850595691 &310631554
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -6024,7 +6043,7 @@ Transform:
   m_GameObject: {fileID: 360941525}
   m_LocalRotation: {x: -0, y: -0.7073513, z: -0, w: 0.7068623}
   m_LocalPosition: {x: 0.03, y: -0.738, z: -0.08}
-  m_LocalScale: {x: 6.044936, y: 0.039433666, z: 1.0674161}
+  m_LocalScale: {x: 6.044936, y: 0.039433666, z: 0.8098593}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 304532012}
@@ -16379,7 +16398,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27680
+  m_Name: pb_Mesh27690
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17460,7 +17479,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 114
   m_CollisionDetection: 1
 --- !u!135 &1649697648
 SphereCollider:
@@ -17555,7 +17574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pelotaRigidbody: {fileID: 1649697646}
-  jumpForce: 2
+  jumpForce: 4
   ultraSpeed: 3
   trail: {fileID: 1474051676}
   velocidadMinimaParaRomper: 0.1

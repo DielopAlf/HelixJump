@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class Pelota : MonoBehaviour
 {
     public Rigidbody pelotaRigidbody;
-    public float jumpForce = 2f;
+    public float jumpForce = 4f;
     public float ultraSpeed = 3f;
     [SerializeField] GameObject trail;
-    public float velocidadMinimaParaRomper = 50f;
+    public float velocidadMinimaParaRomper = 0.1f;
     public float tiempoDeInvencibilidad = 2f;
     private bool invencible = false;
     public float velocidadNormal;
@@ -24,31 +24,44 @@ public class Pelota : MonoBehaviour
     void Update()
     {
         trail.SetActive(pelotaRigidbody.velocity.y < -ultraSpeed);
-    }
 
-  private void OnCollisionEnter(Collision collision)
-{
-    if (collision.gameObject.CompareTag("Plataforma"))
-    {
-        if (Mathf.Abs(pelotaRigidbody.velocity.y) <= velocidadMinimaParaRomper)
+        // Verifica si se alcanzó la velocidad de romper plataformas
+        if (pelotaRigidbody.velocity.magnitude >= GetComponent<Plataformas>().velocidadParaRomperse)
         {
-            // Rebota en la plataforma
-            pelotaRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            // Obtiene todas las plataformas destruibles
+            GameObject[] plataformas = GameObject.FindGameObjectsWithTag("Plataformamala");
+
+            foreach (GameObject plataforma in plataformas)
+            {
+                // Destruye la plataforma
+                Destroy(plataforma);
+            }
         }
     }
-    else if (collision.gameObject.CompareTag("Plataformamala"))
+
+    private void OnCollisionEnter(Collision collision)
     {
-        // Reinicia el juego si choca con una plataforma mala
-        SistemadePuntos.instance.resetPuntos();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (collision.gameObject.CompareTag("Plataforma"))
+        {
+            if (Mathf.Abs(pelotaRigidbody.velocity.y) <= velocidadMinimaParaRomper)
+            {
+                // Rebota en la plataforma
+                pelotaRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
+        }
+        else if (collision.gameObject.CompareTag("Plataformamala"))
+        {
+            // Reinicia el juego si choca con una plataforma mala
+            SistemadePuntos.instance.resetPuntos();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else if (collision.gameObject.CompareTag("META"))
+        {
+            SistemadePuntos.instance.gameOver();
+            gameObject.SetActive(false);
+            InterfazController.instance.MostrarPanelVictoria();
+        }
     }
-    else if (collision.gameObject.CompareTag("META"))
-    {
-        SistemadePuntos.instance.gameOver();
-        gameObject.SetActive(false);
-        InterfazController.instance.MostrarPanelVictoria();
-    }
-}
 
     IEnumerator TiempoInvencible()
     {
