@@ -26,39 +26,29 @@ public class Pelota : MonoBehaviour
         trail.SetActive(pelotaRigidbody.velocity.y < -ultraSpeed);
     }
 
-    private void OnCollisionEnter(Collision collision)
+  private void OnCollisionEnter(Collision collision)
+{
+    if (collision.gameObject.CompareTag("Plataforma"))
     {
-        if (collision.gameObject.CompareTag("Plataforma"))
+        if (Mathf.Abs(pelotaRigidbody.velocity.y) <= velocidadMinimaParaRomper)
         {
-            if (Mathf.Abs(pelotaRigidbody.velocity.y) <= velocidadMinimaParaRomper)
-            {
-                collision.gameObject.SetActive(false);
-            }
-        }
-        else if (collision.gameObject.CompareTag("Plataformamala"))
-        {
-            if (!invencible && Mathf.Abs(pelotaRigidbody.velocity.y) > velocidadMinimaParaRomper)
-            {
-                SistemadePuntos.instance.resetPuntos();
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-            else
-            {
-                collision.gameObject.SetActive(false);
-            }
-        }
-        else if (collision.gameObject.CompareTag("META"))
-        {
-            SistemadePuntos.instance.gameOver();
-            gameObject.SetActive(false);
-            InterfazController.instance.MostrarPanelVictoria();
-        }
-        else
-        {
-            pelotaRigidbody.velocity = Vector3.zero;
+            // Rebota en la plataforma
             pelotaRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
+    else if (collision.gameObject.CompareTag("Plataformamala"))
+    {
+        // Reinicia el juego si choca con una plataforma mala
+        SistemadePuntos.instance.resetPuntos();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    else if (collision.gameObject.CompareTag("META"))
+    {
+        SistemadePuntos.instance.gameOver();
+        gameObject.SetActive(false);
+        InterfazController.instance.MostrarPanelVictoria();
+    }
+}
 
     IEnumerator TiempoInvencible()
     {
