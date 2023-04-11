@@ -5582,11 +5582,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09664af4aa0798c45883fb1a0b8e91d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plataformasMalas: []
+  plataformasMalas:
+  - {fileID: 1753282009}
+  - {fileID: 1814246376}
+  - {fileID: 360941525}
   fuerzaExplosion: 500
   radioExplosion: 100
   velocidadMinimaParaDestruir: 0.1
-  esPlataformaMala: 0
   velocidadParaRomperse: 5
 --- !u!850595691 &310631554
 LightingSettings:
@@ -17044,7 +17046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1502051889
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17577,7 +17579,7 @@ MonoBehaviour:
   jumpForce: 4
   ultraSpeed: 3
   trail: {fileID: 1474051676}
-  velocidadMinimaParaRomper: 0.1
+  velocidadMinimaParaRomper: 10
   tiempoDeInvencibilidad: 2
   velocidadNormal: 0
 --- !u!1 &1655744196
