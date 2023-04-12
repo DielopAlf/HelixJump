@@ -10311,7 +10311,7 @@ Transform:
   m_GameObject: {fileID: 938921433}
   m_LocalRotation: {x: -0, y: 0.5246289, z: -0, w: 0.8513311}
   m_LocalPosition: {x: 0.05999994, y: 0.9905949, z: -0.07999821}
-  m_LocalScale: {x: 6.6000996, y: 0.02324383, z: 1.0188417}
+  m_LocalScale: {x: 6.6000996, y: 0.02324383, z: 1.031781}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 304532012}
@@ -13278,7 +13278,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1048158159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13293,7 +13293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadRotacion: 10
   velocidadMovimiento: 0.5
-  tiempoVida: 5
+  tiempoVida: 1
 --- !u!65 &1048158160
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17741,7 +17741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1502051889
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18388,7 +18388,7 @@ MonoBehaviour:
   jumpForce: 4
   ultraSpeed: 3
   trail: {fileID: 1474051676}
-  velocidadMinimaParaRomper: 10
+  velocidadMinimaParaRomper: 12
   tiempoDeInvencibilidad: 2
   velocidadNormal: 0
 --- !u!1 &1655744196
