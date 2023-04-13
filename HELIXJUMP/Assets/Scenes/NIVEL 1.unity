@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -399,7 +399,7 @@ PrefabInstance:
     - target: {fileID: 6976992370276461591, guid: 0cfee175d292a544da36900ee5fbae9b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6976992370276461591, guid: 0cfee175d292a544da36900ee5fbae9b,
         type: 3}
@@ -5685,7 +5685,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &304532008
 GameObject:
@@ -10053,7 +10053,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &730162069
 GameObject:
@@ -13329,7 +13329,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &998969253
 GameObject:
@@ -13532,7 +13532,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1048158158
 GameObject:
@@ -13645,7 +13645,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1069916552
 GameObject:
@@ -17145,7 +17145,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1172262869
 GameObject:
@@ -17654,7 +17654,7 @@ RectTransform:
   m_Children:
   - {fileID: 1612211998}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -18399,7 +18399,7 @@ PrefabInstance:
     - target: {fileID: 3808978746488003259, guid: 8bc6741fe802faa4e95f1a7ee842d6f9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 3808978746488003259, guid: 8bc6741fe802faa4e95f1a7ee842d6f9,
         type: 3}
@@ -18495,6 +18495,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas Niveles
+      objectReference: {fileID: 0}
+    - target: {fileID: 3808978746488003263, guid: 8bc6741fe802faa4e95f1a7ee842d6f9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bc6741fe802faa4e95f1a7ee842d6f9, type: 3}
@@ -18732,7 +18737,7 @@ GameObject:
   - component: {fileID: 1578775478}
   - component: {fileID: 1578775480}
   m_Layer: 0
-  m_Name: gestorpuntos
+  m_Name: Controlador
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18750,6 +18755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07661a54bf9fdf347bd15d7b698bd34c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  metros: 0
   Meta: {fileID: 2083358368}
   distanciadeltramo: 2
   pelota: {fileID: 1649697652}
@@ -18766,7 +18772,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1578775480
 MonoBehaviour:
@@ -18786,6 +18792,8 @@ MonoBehaviour:
   panelVictoria: {fileID: 79240214}
   panelGameOver: {fileID: 0}
   distanciaslider: {fileID: 357583369}
+  metrosvictoria: {fileID: 1375610476}
+  metrosrecord: {fileID: 2116912709}
 --- !u!43 &1594958883
 Mesh:
   m_ObjectHideFlags: 0
@@ -22279,7 +22287,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1691334693
 GameObject:
@@ -26745,7 +26753,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1753282009
 GameObject:
@@ -33055,7 +33063,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1913062408
 Mesh:
@@ -33063,7 +33071,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh74842
+  m_Name: pb_Mesh35502
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

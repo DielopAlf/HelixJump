@@ -15,6 +15,10 @@ public class InterfazController : MonoBehaviour
     public GameObject panelGameOver;
     public static InterfazController instance;
     public Slider distanciaslider;
+    public TextMeshProUGUI metrosvictoria;
+    public TextMeshProUGUI metrosrecord;
+
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -76,6 +80,10 @@ public class InterfazController : MonoBehaviour
     {
         panelVictoria.SetActive(true);
         Time.timeScale = 0f;
+        textmetros.gameObject.SetActive(false);
+        textopuntos.gameObject.SetActive(false);
+        metrosvictoria.text="Has recorrido "+ SistemadePuntos.instance.metros;
+        metrosrecord.text="El record es "+ PlayerPrefs.GetInt((SceneManager.GetActiveScene().name+"metros"));
     }
 
     public void MostrarPanelGameOver()
@@ -98,4 +106,5 @@ public class InterfazController : MonoBehaviour
     {
         Application.Quit();
     }
+  
 }

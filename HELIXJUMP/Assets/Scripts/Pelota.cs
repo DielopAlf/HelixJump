@@ -14,18 +14,19 @@ public class Pelota : MonoBehaviour
     private bool invencible = false;
     public float velocidadNormal;
     float velocidadprevia;
+   
     private void Awake()
     {
         pelotaRigidbody = GetComponent<Rigidbody>();
         trail.SetActive(false);
         velocidadNormal = ultraSpeed;
+        
     }
 
     void Update()
     {
         trail.SetActive(pelotaRigidbody.velocity.y < -ultraSpeed);
         velocidadprevia=pelotaRigidbody.velocity.magnitude;
-        Debug.Log(velocidadprevia);
         // Verifica si se alcanzó la velocidad de romper plataformas
         /*if (pelotaRigidbody.velocity.magnitude >= GetComponent<Plataformas>().velocidadParaRomperse)
         {
@@ -65,7 +66,9 @@ public class Pelota : MonoBehaviour
             else 
             {
              // Reinicia el juego si choca con una plataforma mala
+
                 SistemadePuntos.instance.resetPuntos();
+                SistemadePuntos.instance.guardarmetrosprevios();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
            
@@ -73,6 +76,7 @@ public class Pelota : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("META"))
         {
+            SistemadePuntos.instance.almacenarrecords();
             SistemadePuntos.instance.gameOver();
             gameObject.SetActive(false);
             InterfazController.instance.MostrarPanelVictoria();
