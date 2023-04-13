@@ -8,7 +8,9 @@ using UnityEngine.UI;
 public class InterfazController : MonoBehaviour
 {
     public TextMeshProUGUI puntospelota;
+   // public TextMeshProUGUI metrospelota;
     public TextMeshProUGUI textopuntos;
+    public TextMeshProUGUI textmetros;
     public GameObject panelVictoria;
     public GameObject panelGameOver;
     public static InterfazController instance;
@@ -46,6 +48,29 @@ public class InterfazController : MonoBehaviour
 
         }
     }
+   public void Updatetextmetros(int metros)
+     {
+         textmetros.text = "Metros: " + metros;
+
+     }
+
+    /* public void updatemetrospelota(float metros)
+
+
+   {
+       if (metros >= 1)
+       {
+           metrospelota.gameObject.SetActive(true);
+           metrospelota.text = "+" + metros;
+       }
+       else
+       {
+
+           metrospelota.gameObject.SetActive(false);
+
+
+       }
+   }*/
 
     public void MostrarPanelVictoria()
     {
