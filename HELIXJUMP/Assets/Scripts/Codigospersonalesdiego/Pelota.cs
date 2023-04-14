@@ -11,10 +11,10 @@ public class Pelota : MonoBehaviour
     [SerializeField] GameObject trail;
     public float velocidadMinimaParaRomper = 0.1f;
     public float tiempoDeInvencibilidad = 2f;
-    private bool invencible = false;
+    //private bool invencible = false;
     public float velocidadNormal;
     float velocidadprevia;
-    [SerializeField] int nivel= 1;
+   // [SerializeField] int nivel= 1;
     // initialpotition
     // enposition
     //[]
@@ -98,9 +98,9 @@ public class Pelota : MonoBehaviour
 
     IEnumerator TiempoInvencible()
     {
-        invencible = true;
+       // invencible = true;
         yield return new WaitForSeconds(tiempoDeInvencibilidad);
-        invencible = false;
+       // invencible = false;
     }
 
     public void ActivarPowerUp()
