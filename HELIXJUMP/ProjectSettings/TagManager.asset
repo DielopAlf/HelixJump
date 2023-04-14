@@ -9,6 +9,10 @@ TagManager:
   - Plataformamala
   - META
   - PowerUp
+  - EndGame
+  - u
+  - New tag
+  - Final
   layers:
   - Default
   - TransparentFX

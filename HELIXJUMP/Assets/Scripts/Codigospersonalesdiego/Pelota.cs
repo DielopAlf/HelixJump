@@ -14,6 +14,7 @@ public class Pelota : MonoBehaviour
     private bool invencible = false;
     public float velocidadNormal;
     float velocidadprevia;
+    [SerializeField] int nivel= 1;
     // initialpotition
     // enposition
     //[]
@@ -69,7 +70,7 @@ public class Pelota : MonoBehaviour
             {
                 collision.gameObject.SetActive(false);
                 pelotaRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
+                //guardardatos();
             }
             else
             {
@@ -78,6 +79,7 @@ public class Pelota : MonoBehaviour
                 SistemadePuntos.instance.resetPuntos();
                 SistemadePuntos.instance.guardarmetrosprevios();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                //guardardatos();
             }
 
 
@@ -112,6 +114,12 @@ public class Pelota : MonoBehaviour
         yield return new WaitForSeconds(5f);
         ultraSpeed = velocidadNormal;
     }
+
+
+
+
+
+
     //stringlevel="metrosnivel"+nivel,tostring();
     //if()playerprefs.getfloat(keylevel,0.0f)
     //playerprefs.setfloat("metrosnivel" +nivel.tostring(),0,0f < metrosrecorridos);
@@ -120,6 +128,8 @@ public class Pelota : MonoBehaviour
 
     /* void guardardatos(bool haswon)
    {
+    endposition=transform.position.y;
+    ballRigidigbody.constraints=rigidbodyconstraint.freezeall
      float metrosrecorridos = initialPosition - endPosition;
      string keylevel = "MetrosNivel" + CambioNivel.ToString();
      if (playerprefs.getfloat(keylevel,0.0f)< metrosrecorridos)
