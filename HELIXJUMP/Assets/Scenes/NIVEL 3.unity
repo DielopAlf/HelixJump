@@ -6679,6 +6679,7 @@ MonoBehaviour:
   velocidadMinimaParaRomper: 12
   tiempoDeInvencibilidad: 2
   velocidadNormal: 0
+  nivel: 1
 --- !u!54 &227770520
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -30708,11 +30709,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puntospelota: {fileID: 671829366}
+  metrospelota: {fileID: 0}
   textopuntos: {fileID: 1657491728}
   textmetros: {fileID: 1363669882}
   panelVictoria: {fileID: 1540809591}
   panelGameOver: {fileID: 0}
   distanciaslider: {fileID: 2019427489}
+  metrosvictoria: {fileID: 0}
+  metrosrecord: {fileID: 0}
 --- !u!114 &1811857004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30720,11 +30724,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811857002}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07661a54bf9fdf347bd15d7b698bd34c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  metros: 0
   Meta: {fileID: 259352299}
   distanciadeltramo: 2
   pelota: {fileID: 227770519}

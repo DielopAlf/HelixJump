@@ -829,7 +829,7 @@ GameObject:
   - component: {fileID: 161120074}
   m_Layer: 0
   m_Name: MALA 7
-  m_TagString: Plataformamala
+  m_TagString: EndGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -943,7 +943,7 @@ GameObject:
   - component: {fileID: 201190717}
   m_Layer: 0
   m_Name: MALA 6
-  m_TagString: Plataformamala
+  m_TagString: EndGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1157,6 +1157,7 @@ GameObject:
   - component: {fileID: 288011923}
   - component: {fileID: 288011922}
   - component: {fileID: 288011921}
+  - component: {fileID: 288011926}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -1206,7 +1207,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288011919}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09664af4aa0798c45883fb1a0b8e91d2, type: 3}
   m_Name: 
@@ -1232,7 +1233,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288011919}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10ac6e065b2fa744d928733e9ef2ade3, type: 3}
   m_Name: 
@@ -1303,6 +1304,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288011919}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &288011926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288011919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f751e23a9698a419ee38503e5ca280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!1 &342282166
 GameObject:
   m_ObjectHideFlags: 0
@@ -1943,7 +1957,7 @@ GameObject:
   - component: {fileID: 456711471}
   m_Layer: 0
   m_Name: MALA 9
-  m_TagString: Plataformamala
+  m_TagString: EndGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2481,7 +2495,7 @@ GameObject:
   - component: {fileID: 598863773}
   m_Layer: 0
   m_Name: MALA 4
-  m_TagString: Plataformamala
+  m_TagString: EndGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10579,11 +10593,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puntospelota: {fileID: 1130854024}
+  metrospelota: {fileID: 0}
   textopuntos: {fileID: 1606426860}
   textmetros: {fileID: 445813856}
   panelVictoria: {fileID: 441079308}
   panelGameOver: {fileID: 0}
   distanciaslider: {fileID: 986377739}
+  metrosvictoria: {fileID: 0}
+  metrosrecord: {fileID: 0}
 --- !u!114 &682120658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10591,11 +10608,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 682120656}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07661a54bf9fdf347bd15d7b698bd34c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  metros: 0
   Meta: {fileID: 1097182967}
   distanciadeltramo: 2
   pelota: {fileID: 1722125968}
@@ -10769,7 +10787,7 @@ GameObject:
   - component: {fileID: 710128710}
   m_Layer: 0
   m_Name: MALA 1
-  m_TagString: Plataformamala
+  m_TagString: EndGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10951,19 +10969,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 725975354}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 682120657}
-        m_TargetAssemblyTypeName: InterfazController, Assembly-CSharp
-        m_MethodName: SalirJuego
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &725975354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14417,7 +14423,7 @@ GameObject:
   - component: {fileID: 1097182968}
   m_Layer: 0
   m_Name: META
-  m_TagString: META
+  m_TagString: Final
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14510,7 +14516,7 @@ Transform:
   m_GameObject: {fileID: 1097182967}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -38.1, z: 44}
-  m_LocalScale: {x: 15.0355015, y: 0.6263261, z: 12.847299}
+  m_LocalScale: {x: 38.160103, y: 1.5896157, z: 32.606445}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -20823,6 +20829,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1235945539}
   m_CullTransparentMesh: 1
+--- !u!1001 &1276736316
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3377299410874836665, guid: fd96a61584ad32d45a692194fb1090d1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377299410874836665, guid: fd96a61584ad32d45a692194fb1090d1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.13786602
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377299410874836665, guid: fd96a61584ad32d45a692194fb1090d1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.5852685
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377299410874836665, guid: fd96a61584ad32d45a692194fb1090d1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 43.732727
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377299410874836665, guid: fd96a61584ad32d45a692194fb1090d1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377299410874836665, guid: fd96a61584ad32d45a692194fb1090d1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377299410874836665, guid: fd96a61584ad32d45a692194fb1090d1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377299410874836665, guid: fd96a61584ad32d45a692194fb1090d1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377299410874836665, guid: fd96a61584ad32d45a692194fb1090d1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377299410874836665, guid: fd96a61584ad32d45a692194fb1090d1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377299410874836665, guid: fd96a61584ad32d45a692194fb1090d1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377299410874836667, guid: fd96a61584ad32d45a692194fb1090d1,
+        type: 3}
+      propertyPath: m_Name
+      value: Controlador
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fd96a61584ad32d45a692194fb1090d1, type: 3}
 --- !u!1 &1281211102
 GameObject:
   m_ObjectHideFlags: 0
@@ -20838,7 +20913,7 @@ GameObject:
   - component: {fileID: 1281211104}
   m_Layer: 0
   m_Name: MALA 3
-  m_TagString: Plataformamala
+  m_TagString: EndGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29828,7 +29903,7 @@ GameObject:
   - component: {fileID: 1670711546}
   m_Layer: 0
   m_Name: MALA 5
-  m_TagString: Plataformamala
+  m_TagString: EndGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32887,6 +32962,7 @@ GameObject:
   - component: {fileID: 1722125970}
   - component: {fileID: 1722125969}
   - component: {fileID: 1722125968}
+  - component: {fileID: 1722125973}
   m_Layer: 0
   m_Name: pelota
   m_TagString: Ball
@@ -32902,7 +32978,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722125966}
   m_LocalRotation: {x: 0.13342644, y: 0.12075396, z: -0.016381394, w: 0.9835383}
-  m_LocalPosition: {x: 1.44, y: 43.02, z: 42.49}
+  m_LocalPosition: {x: 5.2, y: 38.7, z: 57.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -32918,7 +32994,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722125966}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 503ba8dae03effc44b1bcaf5ce9a738e, type: 3}
   m_Name: 
@@ -32930,6 +33006,7 @@ MonoBehaviour:
   velocidadMinimaParaRomper: 12
   tiempoDeInvencibilidad: 2
   velocidadNormal: 0
+  nivel: 1
 --- !u!54 &1722125969
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -33009,6 +33086,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722125966}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1722125973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722125966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d87f08047207fd04cb868f2bf3921b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 3
+  ultraSpeed: 10
+  trail: {fileID: 690286811}
+  nivel: 2
+  initialPosition: 0
+  endPosition: 0
 --- !u!1 &1923153486
 GameObject:
   m_ObjectHideFlags: 0
@@ -33396,7 +33491,7 @@ GameObject:
   - component: {fileID: 2132483996}
   m_Layer: 0
   m_Name: MALA 2
-  m_TagString: Plataformamala
+  m_TagString: EndGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
