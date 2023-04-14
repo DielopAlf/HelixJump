@@ -42,7 +42,7 @@ public class SistemadePuntos : MonoBehaviour
         //transform.position.y
         posicionprevia = pelota.gameObject.transform.position.y;
         metros = PlayerPrefs.GetInt("metrosactuales"); 
-        InterfazController.instance.Updatetextmetros(metros);
+        InterfazController.instance.updatetextmetros(metros);
         Debug.Log(PlayerPrefs.GetInt((SceneManager.GetActiveScene().name+"metros"),0));
     }
 
@@ -76,7 +76,7 @@ public class SistemadePuntos : MonoBehaviour
              if(pelota.gameObject.transform.position.y <= posicionprevia -1)
             {
                 metros+=1;
-                InterfazController.instance.Updatetextmetros(metros);
+                InterfazController.instance.updatetextmetros(metros);
                 posicionprevia = pelota.gameObject.transform.position.y;
             }
          //     Debug.Log(metros);   

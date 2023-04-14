@@ -49,7 +49,7 @@ public class InterfazController : MonoBehaviour
         }
     }
 
-    public void Updatetextmetros(int metros)
+    public void updatetextmetros(int metros)
     {
         textmetros.text = "Metros: " + metros;
     }
@@ -69,7 +69,7 @@ public class InterfazController : MonoBehaviour
 
     public void MostrarPanelVictoria()
     {
-        int nivelActual = int.Parse(SceneManager.GetActiveScene().name.Replace("Nivel", ""));
+      /*  int nivelActual = int.Parse(SceneManager.GetActiveScene().name.Replace("Nivel", ""));
         int nivelAnterior = nivelActual - 1;
 
         if (nivelAnterior >= 1)
@@ -80,7 +80,7 @@ public class InterfazController : MonoBehaviour
                 Debug.Log("Completa el nivel anterior primero.");
                 return;
             }
-        }
+        }*/
 
         panelVictoria.SetActive(true);
         Time.timeScale = 0f;
