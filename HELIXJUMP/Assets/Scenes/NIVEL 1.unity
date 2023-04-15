@@ -587,9 +587,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InterfazController, Assembly-CSharp
-        m_MethodName: SalirJuego
+      - m_Target: {fileID: 1649697653}
+        m_TargetAssemblyTypeName: BallBehaviour, Assembly-CSharp
+        m_MethodName: VolverAlMenuPrincipal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19189,7 +19189,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 114
+  m_Constraints: 122
   m_CollisionDetection: 1
 --- !u!135 &1649697648
 SphereCollider:
@@ -19262,7 +19262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649697645}
   m_LocalRotation: {x: 0.13342644, y: 0.12075396, z: -0.016381394, w: 0.9835383}
-  m_LocalPosition: {x: -1.8, y: 46.7, z: 29.5}
+  m_LocalPosition: {x: 1.1999998, y: 43.4, z: 41.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19303,12 +19303,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87f08047207fd04cb868f2bf3921b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 3
-  ultraSpeed: 10
+  jumpForce: 1
+  ultraSpeed: 5
+  ballRigidbody: {fileID: 1649697646}
   trail: {fileID: 1474051676}
   nivel: 1
+  velocidadMinimaParaRomper: 12
+  tiempoDeInvencibilidad: 2
+  velocidadNormal: 0
   initialPosition: 0
   endPosition: 0
+  metrosRecorridosText: {fileID: 1612211999}
+  reiniciarNivelButton: {fileID: 2121151922}
+  volverAlMenuButton: {fileID: 209604224}
 --- !u!1 &1655744196
 GameObject:
   m_ObjectHideFlags: 0
@@ -33528,9 +33535,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InterfazController, Assembly-CSharp
-        m_MethodName: ReiniciarJuego
+      - m_Target: {fileID: 1649697653}
+        m_TargetAssemblyTypeName: BallBehaviour, Assembly-CSharp
+        m_MethodName: ReiniciarNivel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -33654,6 +33661,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Controlador
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377299410874836667, guid: fd96a61584ad32d45a692194fb1090d1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd96a61584ad32d45a692194fb1090d1, type: 3}
