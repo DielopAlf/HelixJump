@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using MyNamespace;
+using static LeanTween;
 
 public class BallBehaviour : MonoBehaviour
 {
@@ -22,14 +23,17 @@ public class BallBehaviour : MonoBehaviour
     public float endPosition;
     private bool endGameTocado = false;
     public TextMeshProUGUI metrosRecorridosText;
-    public Button reiniciarNivelButton;
-    public Button volverAlMenuButton;
-    private bool juegoDetenido = false;
-    public TextMeshProUGUI metrospelota;
-    public TextMeshProUGUI metrosvictoria;
+    [HideInInspector]
+    public bool juegoDetenido = false;
+    public TextMeshProUGUI metrosFinal;
     public GameObject panelvictoria;
     public TextMeshProUGUI metrosrecord;
-
+    float metros;
+    public TextMeshProUGUI victoriaText;
+     public Slider distanciaslider;
+      float distanciainicial;
+      public nextlevel nivelSiguiente;
+      
     void Awake()
     {
         ballRigidbody = GetComponent<Rigidbody>();
@@ -46,12 +50,12 @@ public class BallBehaviour : MonoBehaviour
     {
         if (metros >= 1)
         {
-            metrospelota.gameObject.SetActive(true);
-            metrospelota.text = "+" + metros;
+            metrosFinal.gameObject.SetActive(true);
+            metrosFinal.text = "+" + metros;
         }
         else
         {
-            metrospelota.gameObject.SetActive(false);
+            metrosFinal.gameObject.SetActive(false);
         }
     }
     }
@@ -63,7 +67,11 @@ public class BallBehaviour : MonoBehaviour
             ballRigidbody.velocity = Vector3.zero;
             return;
         }
+        // Calcular la altura actual de la pelota
+        float currentHeight = Mathf.Max(transform.position.y, 0f);
 
+        // Actualizar el valor del Slider
+        
         trail.SetActive(ballRigidbody.velocity.y < -ultraSpeed);
         velocidadprevia = ballRigidbody.velocity.magnitude;
 
@@ -80,10 +88,10 @@ public class BallBehaviour : MonoBehaviour
         }*/
 
         // Calcular los metros recorridos
-         float metrosRecorridos = initialPosition - transform.position.y;
+         metros = initialPosition - transform.position.y;
 
         // Actualizar el texto en pantalla
-         metrosRecorridosText.text = "Metros recorridos: " + metrosRecorridos.ToString("0.0");
+         metrosRecorridosText.text = "Metros recorridos: " + metros.ToString("0.0");
     }
 private void OnCollisionEnter(Collision collision)
 {
@@ -91,55 +99,103 @@ private void OnCollisionEnter(Collision collision)
     {
         if (velocidadprevia >= velocidadMinimaParaRomper)
         {
-            collision.gameObject.SetActive(false);
+            // Reducir la escala de la plataforma hasta que desaparezca
+            float tiempoDestruccion = 0.5f; // Tiempo en segundos para que la plataforma desaparezca
+            float escalaFinal = 0.1f; // Escala final de la plataforma
+            Vector3 escalaInicial = collision.gameObject.transform.localScale;
+            Vector3 finalScale = new Vector3(escalaFinal, escalaFinal, escalaFinal);
+
+            LeanTween.scale(collision.gameObject, finalScale, tiempoDestruccion)
+                .setEase(LeanTweenType.easeInOutBack)
+                .setOnComplete(() => {
+                    // Cuando la animación de escala termine, desactivar la plataforma
+                    collision.gameObject.SetActive(false);
+                });
+
+            // Cambiar el color del material del objeto
+            Renderer plataformaRenderer = collision.gameObject.GetComponent<Renderer>();
+            if (plataformaRenderer != null)
+            {
+                plataformaRenderer.material.color = Color.black;
+            }
         }
-        // Rebota en la plataforma
-        ballRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-    }
-    else if (collision.gameObject.CompareTag("EndGame"))
-    {
-        if (velocidadprevia >= velocidadMinimaParaRomper)
+        else
         {
-            collision.gameObject.SetActive(false);
+            // Rebota en la plataforma
             ballRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
-        /* else
+    }
+
+
+else if (collision.gameObject.CompareTag("EndGame"))
+{
+    if (velocidadprevia >= velocidadMinimaParaRomper)
+    {
+   
+        // Deshabilitar el collider de la plataforma
+        collision.gameObject.GetComponent<Collider>().enabled = false;
+         // Rebota en la plataforma
+                ballRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+        // Cambiar el color del material del objeto
+        Renderer plataformaRenderer = collision.gameObject.GetComponent<Renderer>();
+        if (plataformaRenderer != null)
         {
-            // Reinicia el juego si choca con una plataforma mala
-            SistemadePuntos.instance.resetPuntos();
-            SistemadePuntos.instance.guardarmetrosprevios();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }*/
+            plataformaRenderer.material.color = Color.black;
+        }
 
-        endGameTocado = true;
+        // Reducir la escala de la plataforma hasta que desaparezca
+        float tiempoDestruccion = 0.5f; // Tiempo en segundos para que la plataforma desaparezca
+        float escalaFinal = 0.1f; // Escala final de la plataforma
+        Vector3 escalaInicial = collision.gameObject.transform.localScale;
+        Vector3 finalScale = new Vector3(escalaFinal, escalaFinal, escalaFinal);
 
-        // Desactivar el movimiento de la bola
-        ballRigidbody.velocity = Vector3.zero;
-        ballRigidbody.angularVelocity = Vector3.zero;
+        LeanTween.scale(collision.gameObject, finalScale, tiempoDestruccion)
+            .setEase(LeanTweenType.easeInOutBack)
+            .setOnComplete(() =>
+            {
+             
+                // Cuando la animación de escala termine, desactivar la plataforma
+                collision.gameObject.SetActive(false);
 
-        // Desactivar el control del jugador
-        GetComponent<BallBehaviour>().enabled = false;
+               
+            });
+    }
+    
+   
+           
 
-        // Mostrar los botones de reiniciar y volver al menú principal
-        reiniciarNivelButton.gameObject.SetActive(true);
-        volverAlMenuButton.gameObject.SetActive(true);
 
-        // Mostrar los metros recorridos en pantalla
-        float metrosRecorridos = initialPosition - transform.position.y;
-        metrosRecorridosText.text = "Metros recorridos: " + metrosRecorridos.ToString("0.0");
-        metrosRecorridosText.gameObject.SetActive(true);
-        metrosRecorridosText.text = "Metros recorridos: " + metrosRecorridos.ToString("0.0");
-        // Mostrar el récord
-        metrospelota.text = "El récord es " + PlayerPrefs.GetInt((SceneManager.GetActiveScene().name + "metros"));
+            else
+            {
+                GuardarDatos(false);
+                endGameTocado = true;
 
-        // Desactivar el movimiento de la bola
-        ballRigidbody.velocity = Vector3.zero;
-        ballRigidbody.angularVelocity = Vector3.zero;
-        ballRigidbody.constraints = RigidbodyConstraints.None;
+                // Desactivar el movimiento de la bola
+                ballRigidbody.velocity = Vector3.zero;
+                ballRigidbody.angularVelocity = Vector3.zero;
+                ballRigidbody.isKinematic = true;
+                GetComponent<MeshRenderer>().enabled = false;
+                // Desactivar el control del jugador
+                //GetComponent<BallBehaviour>().enabled = false;
 
-        // Pausar el juego
-        Time.timeScale = 0f;
-        juegoDetenido = true;
+
+                panelvictoria.SetActive(true);
+
+
+                // Mostrar los metros recorridos en pantalla
+                metros = initialPosition - transform.position.y;
+                metrosRecorridosText.gameObject.SetActive(false);
+                // Mostrar el récord
+                metrosrecord.text = "El récord es " + PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name + "MetrosRecord", 0.0f).ToString("0.0") + " m";
+                metrosFinal.text = "Has recorrido " + metros.ToString("0.0") + " m";
+                victoriaText.text = "Derrota";
+
+                // Pausar el juego
+                Time.timeScale = 0f;
+                juegoDetenido = true;
+            }
+        
         
     }
 
@@ -150,74 +206,57 @@ private void OnCollisionEnter(Collision collision)
        // Desactivar el movimiento de la bola
         ballRigidbody.velocity = Vector3.zero;
         ballRigidbody.angularVelocity = Vector3.zero;
+            ballRigidbody.isKinematic = true;
+            GetComponent<MeshRenderer>().enabled = false;
+            // Desactivar el control del jugador
+            //GetComponent<BallBehaviour>().enabled = false;
 
-        // Desactivar el control del jugador
-        GetComponent<BallBehaviour>().enabled = false;
-
-        // Mostrar los botones de reiniciar y volver al menú principal
-        reiniciarNivelButton.gameObject.SetActive(true);
-        volverAlMenuButton.gameObject.SetActive(true);
-        panelvictoria.SetActive(true);
+            panelvictoria.SetActive(true);
         // Mostrar los metros recorridos en pantalla
-        float metrosRecorridos = initialPosition - transform.position.y;
-        metrosvictoria.text = "Has recorrido " +  metrosRecorridos;
-        string keyLevel = "MetrosNivel" + nivel.ToString();
-        metrosrecord.text = "El record es" + PlayerPrefs.GetInt(keyLevel);
-        metrosRecorridosText.text = "Metros recorridos: " + metrosRecorridos.ToString("0.0");
-        metrosRecorridosText.gameObject.SetActive(true);
-        metrospelota.text = "El record es " + PlayerPrefs.GetInt((SceneManager.GetActiveScene().name + "metros"));
-        // Desactivar el movimiento de la bola
-        ballRigidbody.velocity = Vector3.zero;
-        ballRigidbody.angularVelocity = Vector3.zero;
-        ballRigidbody.constraints = RigidbodyConstraints.None;
+        metros = initialPosition - transform.position.y;
+            metrosRecorridosText.gameObject.SetActive(false);
+            // Mostrar el récord
+            metrosrecord.text = "El récord es " + PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name + "MetrosRecord", 0.0f).ToString("0.0") + " m";
+            metrosFinal.text = "Has recorrido " + metros.ToString("0.0") + " m";
+            victoriaText.text = "Victoria";
+
+
         // Pausar el juego
         Time.timeScale = 0f;
         juegoDetenido = true;
         //Victoria
-        
-        Debug.Log("ejecutando");
+       
     }
 }
 
 void GuardarDatos(bool hasWon)
 {
     endPosition = transform.position.y;
-    ballRigidbody.constraints = RigidbodyConstraints.FreezeAll;
 
-    float metrosRecorridos = initialPosition - endPosition;
-    string keyLevel = "MetrosNivel" + nivel.ToString();
-    if (PlayerPrefs.GetFloat(keyLevel, 0.0f) < metrosRecorridos)
+
+    metros = initialPosition - endPosition;
+
+    if (PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name + "MetrosRecord", 0.0f) < metros)
     {
-        PlayerPrefs.SetFloat(keyLevel, metrosRecorridos);
+        PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "MetrosRecord", metros);
     }
     if (hasWon == true)
     {
         PlayerPrefs.SetInt("NivelSuperado" + nivel.ToString(), 1);
     }
-    transform.position = new Vector3(0, initialPosition, 0);
+
     PlayerPrefs.Save();
 
-    // Mostrar los metros recorridos en pantalla
-    metrosRecorridosText.text = "Metros recorridos: " + metrosRecorridos.ToString("F1");
-    metrosRecorridosText.gameObject.SetActive(true);
 
-    // Desactivar el movimiento de la bola
-    ballRigidbody.velocity = Vector3.zero;
-    ballRigidbody.angularVelocity = Vector3.zero;
-    ballRigidbody.constraints = RigidbodyConstraints.None;
 
     // Desactivar el control del jugador
-    GetComponent<BallBehaviour>().enabled = false;
-
-    // Mostrar los botones de reiniciar y volver al menú principal
-    reiniciarNivelButton.gameObject.SetActive(true);
-    volverAlMenuButton.gameObject.SetActive(true);
+    //GetComponent<BallBehaviour>().enabled = false;
 }
 
 
 public void ReiniciarNivel()
 {
-    // Cargar de nuevo la escena actual
+        // Cargar de nuevo la escena actual
     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     Time.timeScale = 1; // Restablecer la escala de tiempo del juego
     juegoDetenido = false;
@@ -226,10 +265,22 @@ public void ReiniciarNivel()
 public void VolverAlMenuPrincipal()
 {
     // Cargar la escena del menú principal
-    SceneManager.LoadScene("MenuPrincipal");
+    SceneManager.LoadScene("MenuInicial");
     Time.timeScale = 1; // Restablecer la escala de tiempo del juego
 }
+public  void distanciaMeta()
+    {
+        if(ballRigidbody != null)
+        {
+          float distance = Vector3.Distance(ballRigidbody.gameObject.transform.position, panelvictoria.transform.position) / distanciainicial;
+            InterfazController.instance.ACTUALIZARDISTANCIA(1-distance);
+        }
 
+    }
+public void ACTUALIZARDISTANCIA(float distancia)
+    {
+        distanciaslider.value = distancia;
+    }
 public void CargarSiguienteNivel()
 {
     int siguienteNivel = nivel + 1;
@@ -240,14 +291,10 @@ public void VolverAlMenuSeleccionNivel()
 {
     SceneManager.LoadScene("SeleccionNivel");
 }
-void OnTriggerEnter(Collider other) {
-    if (other.CompareTag("EndGame")) {
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
-        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        
-        GetComponent<BallBehaviour>().enabled = false;
-        reiniciarNivelButton.gameObject.SetActive(true);
-        volverAlMenuButton.gameObject.SetActive(true);
+public void ClearAllData()
+    {
+        PlayerPrefs.DeleteAll();
+        System.IO.Directory.Delete(Application.persistentDataPath, true);
+        Debug.Log("Todos los datos del juego han sido eliminados.");
     }
-}
 }

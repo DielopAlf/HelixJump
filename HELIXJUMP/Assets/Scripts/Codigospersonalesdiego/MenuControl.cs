@@ -41,6 +41,13 @@ namespace MyNamespace
             menuInicial.SetActive(true);
             menuNiveles.SetActive(false);
         }
+        public void ClearAllData()
+    {
+        PlayerPrefs.DeleteAll();
+        System.IO.Directory.Delete(Application.persistentDataPath, true);
+        Debug.Log("Todos los datos del juego han sido eliminados.");
+    }
+
 
         public void cargarNivel(string nivel)
         {
